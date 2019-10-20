@@ -7,20 +7,36 @@ const Song = Backbone.Model.extend({
     /* We can set default attribute by defining the defaults object, as shown below. */
     defaults: {
         genre: 'Jazz'
+    },
+    /* Say we wanted to enforce that every instance of the Song model should have a title attribute. We validate this
+    using the validate method (this method is passed all attributes as an object; Backbone expects that we return a
+    string error message if validation fails), as shown below. */
+    validate(attrs) {
+        if (!attrs.title) {
+            return 'Title is required';
+        }
     }
 });
 
 /* We instantiate a model with the new operator, as shown below. */
 /* We can also set the attributes when initializing the model. */
 const song = new Song({
-    title: 'Blue in Green',
     artist: 'Miles Davis',
     publishYear: 1959
 });
 
+/* We can check if a model is valid or not by calling the .isValid() method, as shown below. */
+console.log(song.isValid());
+
+/* To get the last validation error message we can access the validationError property (in our case, the error message
+is: 'Title is required'), as shown below. */
+console.log(song.validationError);
+
 /* We use the set() method to set an attribute of a Backbone model. First argument is the attribute name and the
 second argument is the attribute value. */
 song.set('title', 'Blue in Green');
+
+console.log(song.isValid());
 
 /* We can also pass a JS object into the set method to set multiple attributes at once. */
 song.set({
