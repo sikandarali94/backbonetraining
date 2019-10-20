@@ -1,4 +1,10 @@
+const Song = Backbone.Model.extend({
+    /* Backbone automatically calls the initialize function when the model is instantiated. Similar to constructor()
+    method of classes. */
+    initialize() {
+        console.log('A new song has been created.');
+    }
+});
 
-// In the first few sections, we do all the coding here.
-// Later, you'll see how to organize your code into separate
-// files and modules.
+/* We instantiate a model with the new operator, as shown below. */
+const song = new Song();
