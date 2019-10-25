@@ -59,3 +59,23 @@ song.clear();
 
 /* To check if a model has a particular attribute, we use the has() method (which returns a boolean), as shown below. */
 song.has('title');
+
+const Animal = Backbone.Model.extend({
+    walk() {
+        console.log('Animal walking...');
+    }
+});
+
+/* So if we want to inherit properties and methods from a model, we use the .extend() method, as shown below. */
+const Dog = Animal.extend({
+    /* If method of the model inheriting from a super model is the same, the method of the model is the one executed.
+    However, if we want to call the method of the super model, we can call it through the prototype, as shown below.*/
+    walk() {
+        Animal.prototype.walk.apply(this);
+        console.log('Dog walking...');
+    }
+});
+
+const dog = new Dog();
+
+dog.walk();
