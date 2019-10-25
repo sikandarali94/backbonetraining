@@ -79,3 +79,41 @@ const Dog = Animal.extend({
 const dog = new Dog();
 
 dog.walk();
+
+/* Backbone has models that can be synchronized with a persistent store using a RESTFul API on the server. It offers
+three methods to work with a persistent store: fetch() [GET], save() [POST/PUT] and destroy() [DELETE]. All these
+methods are asynchronous and accept a success and error callback We set the URL of the API using the urlRoot property
+(this is compulsory otherwise there would an error if we use any of the RESTful methods), as shown below. */
+const Spotify = Backbone.Model.extend({
+    urlRoot: '/api/songs',
+    /* By convention, Backbone assumes our models have an attribute called id which is use for uniquely identifying
+    models. However. if we use a different convention (as is the case here) we can use the idAttribute to tell
+    Backbone which property of our model is used as the identifier (in our case, the identifier is songId). */
+    songId: 1,
+    idAttribute: 'songId'
+});
+
+/* Below is how we simply use one the RESTful methods. The second example demonstrates the usage of success and error
+callbacks. The third example demonstrates how the save method uses callbacks differently compared to the other RESTful
+methods; the first method is where we supply the hash of the attributes that we want to set and save; it is a shortcut
+rather than using the .set() method and then calling the .save() method; either way is fine. */
+
+// song.destroy();
+
+// song.fetch({
+//     success() {
+//         console.log('Success');
+//     },
+//     error() {
+//         console.log('Failure');
+//     }
+// });
+
+// song.save({}, {
+//     success() {
+//         console.log('Success');
+//     },
+//     error() {
+//         console.log('Failure');
+//     }
+// });
